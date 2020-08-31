@@ -194,18 +194,26 @@ int compare_key_times(const void * a, const void * b)
     return (bb->key_times - aa->key_times);
 }
 
-void print_result()
+void top_result(const char* _param)
 {
-    int i;
+    int i, input_num;
     struct tag_key_list sort_list[256];
+
+    input_num = atoi(_param);
+
     memcpy(sort_list, key_list, sizeof(key_list));
     qsort (sort_list, sizeof(key_list) / sizeof(key_list[0]), sizeof(key_list[0]), compare_key_times);
 
     printf("-------------------------------\n");
     for (i = 0; i < sizeof(key_list) / sizeof(key_list[0]); ++i)
     {
+        if (input_num > 0 && i >= input_num)
+            break;
+
         if (sort_list[i].key_times > 0)
-            printf("%6d  =  %s (%d)\n", sort_list[i].key_times, sort_list[i].key_name, sort_list[i].key);
+            printf("%6d  =  %s (%d)\n", sort_list[i].key_times, 
+                                        sort_list[i].key_name, 
+                                        sort_list[i].key);
     }
 }
 
@@ -213,7 +221,7 @@ void input_process(const char* _cmd)
 {
     if (strcmp(_cmd, "q") == 0)             { main_quit = thread_quit = 1;  }
     else if (strcmp(_cmd, "cls") == 0)      { system("cls");    }
-    else if (strcmp(_cmd, "print") == 0)    { print_result();   }
+    else if (strstr(_cmd, "top") == _cmd)   { top_result(_cmd + 3);   }
 }
 
 int main()
