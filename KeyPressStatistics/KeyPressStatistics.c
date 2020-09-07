@@ -221,7 +221,7 @@ void input_process(const char* _cmd)
 {
     if (strcmp(_cmd, "q") == 0)             { main_quit = thread_quit = 1;  }
     else if (strcmp(_cmd, "cls") == 0)      { system("cls");    }
-    else if (strstr(_cmd, "top") == _cmd)   { top_result(_cmd + 3);   }
+    else if (strstr(_cmd, "p") == _cmd)     { top_result(_cmd + 1);   }
 }
 
 int main()
