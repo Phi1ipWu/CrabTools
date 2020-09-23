@@ -10,7 +10,7 @@ volatile int main_quit   = 0;
 struct tag_key_list
 {
     const int       key;
-    const char      key_name[16];
+    const char      key_name[32];
     volatile int    key_times;
     volatile int    key_state;
 };
@@ -211,9 +211,9 @@ void top_result(const char* _param)
             break;
 
         if (sort_list[i].key_times > 0)
-            printf("%6d  =  %s (%d)\n", sort_list[i].key_times, 
-                                        sort_list[i].key_name, 
-                                        sort_list[i].key);
+            printf("%6d  =  %s \n",		sort_list[i].key_times, 
+                                        sort_list[i].key_name);
+                                        //sort_list[i].key);
     }
 }
 
