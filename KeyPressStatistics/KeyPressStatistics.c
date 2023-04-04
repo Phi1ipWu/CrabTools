@@ -180,7 +180,8 @@ unsigned __stdcall thread_keypress(void* args)
             char name[128]  = {0};
             char value[128] = {0};
             int key_times = GetPrivateProfileInt("Key", ltoa(key_list[i].key, name, 10), 0, ".\\KeyPressStatistics.ini");
-            WritePrivateProfileString("Key", name, ltoa(key_list[i].key_times + key_times, value, 10), ".\\KeyPressStatistics.ini");
+			sprintf(value, "%d (%s)", key_list[i].key_times + key_times, key_list[i].key_name);
+            WritePrivateProfileString("Key", name, value, ".\\KeyPressStatistics.ini");
         }
     }
 
